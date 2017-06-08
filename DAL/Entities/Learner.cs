@@ -10,6 +10,7 @@ namespace DAL.Entities
     public class Learner : IEntity<string>
     {
         public string Id { get; set; }
-        public List<LearnersCard> Cards { get; set; }
+        // navigation property --- virtual for lazy loading
+        public virtual ICollection<LearnersCard> Cards { get; set; }
     }
 }
