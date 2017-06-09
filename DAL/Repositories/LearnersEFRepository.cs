@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
+
     public class LearnersEFRepository : IRepository<Learner, string>
     {
         private LearnersContext _context;

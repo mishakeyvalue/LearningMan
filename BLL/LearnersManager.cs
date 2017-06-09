@@ -13,6 +13,7 @@ namespace BLL
     /// Utility class that encapsulates main logic
     /// for manipulating user data
     /// </summary>
+    
     public class LearnersManager
     {
         public static LearnersManager GetManager()
@@ -21,7 +22,14 @@ namespace BLL
             LearnersEFRepository repo = new LearnersEFRepository(context);
             return new LearnersManager(repo);
         }
-
+        private static LearnersManager _instance;
+        public static LearnersManager Instance 
+        {
+            get {
+                if (_instance == null) _instance = GetManager();
+                return _instance;
+            }
+        }
         private IRepository<Learner, string> _repository;
         public LearnersManager(IRepository<Learner, string> repository)
         {

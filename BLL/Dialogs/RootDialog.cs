@@ -8,12 +8,8 @@ namespace BLL.Dialogs
     [Serializable]
     public class RootDialog : IDialog<object>
     {
-        private LearnersManager _manager;
+        private static LearnersManager _manager = LearnersManager.Instance;
 
-        public RootDialog(LearnersManager manager)
-        {
-            _manager = manager;
-        }
         public Task StartAsync(IDialogContext context)
         {
             context.Wait(MessageReceivedAsync);

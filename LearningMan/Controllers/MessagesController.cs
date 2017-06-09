@@ -11,11 +11,6 @@ namespace LearningMan
     [BotAuthentication]
     public class MessagesController : ApiController
     {
-        private LearnersManager _manager;
-        public MessagesController(LearnersManager manager)
-        {
-            _manager = manager;
-        }
         /// <summary>
         /// POST: api/Messages
         /// Receive a message from a user and reply to it
@@ -24,7 +19,7 @@ namespace LearningMan
         {
             if (activity.Type == ActivityTypes.Message)
             {
-               await Conversation.SendAsync(activity, () => new BLL.Dialogs.RootDialog(_manager));
+               await Conversation.SendAsync(activity, () => new BLL.Dialogs.RootDialog());
             }
             else
             {

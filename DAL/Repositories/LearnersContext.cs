@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
+
     public class LearnersContext : DbContext
     {
         private static string _conString = "Server=tcp:studymanager.database.windows.net,1433;Initial Catalog=StudyMan;Persist Security Info=False;User ID=mitutee;Password=Hardware2017;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
