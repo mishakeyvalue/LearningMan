@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LearningMan.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,9 @@ namespace LearningMan
     {
         protected void Application_Start()
         {
+            AutofacConfig.ConfigureContainer(); // my
             GlobalConfiguration.Configure(WebApiConfig.Register);
+
         }
     }
 }

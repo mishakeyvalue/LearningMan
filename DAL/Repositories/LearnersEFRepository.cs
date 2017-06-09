@@ -10,15 +10,23 @@ namespace DAL.Repositories
 {
     public class LearnersEFRepository : IRepository<Learner, string>
     {
+        private LearnersContext _context;
 
+        public LearnersEFRepository(LearnersContext context)
+        {
+            _context = context;
+        }
         public string Add(Learner item)
         {
-            throw new NotImplementedException();
+            _context.Learners.Add(item);
+            _context.SaveChanges();
+            return item.Id;
         }
 
         public void Delete(Learner item)
         {
-            throw new NotImplementedException();
+            _context.Learners.Remove(item);
+            _context.SaveChanges();
         }
 
         public void Delete(string Id)
@@ -28,17 +36,18 @@ namespace DAL.Repositories
 
         public Learner Get(string Id)
         {
-            throw new NotImplementedException();
+            return _context.Learners.Find(Id);
         }
 
-        public IEnumerable<Learner> GetAll()
+        public ICollection<Learner> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Learners.ToList();
         }
 
         public Learner Save(Learner item)
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
+            return item;
         }
     }
 }

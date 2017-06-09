@@ -38,7 +38,7 @@ namespace DAL.Repositories
             return _database.GetCollection<TEntity>(typeof(TEntity).Name).Find(x => x.Id.Equals(id)).FirstOrDefaultAsync().Result;
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public ICollection<TEntity> GetAll()
         {
             string s = typeof(TEntity).Name;
             return _database.GetCollection<TEntity>(typeof(TEntity).Name).Find(new BsonDocument()).ToListAsync().Result;

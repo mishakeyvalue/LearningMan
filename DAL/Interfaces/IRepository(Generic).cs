@@ -7,7 +7,7 @@ namespace DAL.Interfaces
     {
         TEntity Get(TIdentifier Id);
 
-        IEnumerable<TEntity> GetAll();
+        ICollection<TEntity> GetAll();
 
         TIdentifier Add(TEntity item);
 
