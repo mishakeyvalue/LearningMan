@@ -139,6 +139,12 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Dialogs\AuthorDialog.cs" />
+    <Compile Include="Dialogs\HelpDialog.cs" />
+    <Compile Include="Dialogs\RootDialog.cs" />
+    <Compile Include="Dialogs\TrainingDialog.cs" />
+    <Compile Include="Dialogs\Vocabulary\NewWordViewModel.cs" />
+    <Compile Include="Dialogs\Vocabulary\VocabularyDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

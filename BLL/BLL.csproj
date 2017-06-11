@@ -77,11 +77,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dialogs\AuthorDialog.cs" />
-    <Compile Include="Dialogs\HelpDialog.cs" />
-    <Compile Include="Dialogs\RootDialog.cs" />
-    <Compile Include="Dialogs\TrainingDialog.cs" />
-    <Compile Include="Dialogs\VocabularyDialog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LearnersManager.cs" />
   </ItemGroup>

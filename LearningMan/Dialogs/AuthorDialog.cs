@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
 
-namespace BLL.Dialogs
+namespace LearningMan.Dialogs
 {
     [Serializable]
     internal class AuthorDialog : IDialog<object>

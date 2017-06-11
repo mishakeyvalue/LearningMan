@@ -5,8 +5,10 @@ using Microsoft.Bot.Connector;
 using System.Text.RegularExpressions;
 using Microsoft.Bot.Builder.FormFlow;
 using System.Collections.Generic;
+using BLL;
+using LearningMan.Dialogs.Vocabulary;
 
-namespace BLL.Dialogs
+namespace LearningMan.Dialogs
 {
     [Serializable]
     public class RootDialog : IDialog<object>
@@ -59,15 +61,14 @@ namespace BLL.Dialogs
                     context.Call(new AuthorDialog(), resumeAfterOptionDialog);
                     break;
                 default:
+                    await context.PostAsync("No such option =(");
                     break;
             }
-
         }
 
         private async Task resumeAfterOptionDialog(IDialogContext context, IAwaitable<object> result)
         {
 
-            object res = await result;  await context.PostAsync(res.ToString());
             //This means  MessageRecievedAsync function of this dialog (PromptButtonsDialog) will receive users' messeges
             context.Wait(MessageReceivedAsync);
             
@@ -78,8 +79,6 @@ namespace BLL.Dialogs
             await context.PostAsync("Hi! I can assist you in your learning process =)");
         }
 
-
-        enum MainMenu { Vocabulary, Training, Help, Authors }
 
     }
 }
