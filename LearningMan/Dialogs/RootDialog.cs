@@ -31,6 +31,7 @@ namespace LearningMan.Dialogs
         #endregion
 
         private static LearnersManager _manager = LearnersManager.Instance;
+        private string _userId;
 
         public async Task StartAsync(IDialogContext context)
         {
@@ -39,6 +40,10 @@ namespace LearningMan.Dialogs
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
         {
+            Activity message = await result as Activity;
+
+            _userId = message.From.Id;
+
             PromptDialog.Choice(context, resumeAfterMenuSelection, MAIN_MENU_OPTS, "Here is my main menu!");
         }
 
@@ -49,7 +54,7 @@ namespace LearningMan.Dialogs
             switch (answer)
             {
                 case VOCABULARY_MENU_OPT:
-                    context.Call(new VocabularyDialog(), resumeAfterOptionDialog);
+                    context.Call(new VocabularyDialog(_userId), resumeAfterOptionDialog);
                     break;
                 case TRAINING_MENU_OPT:
                     context.Call(new TrainingDialog(), resumeAfterOptionDialog);
@@ -67,7 +72,7 @@ namespace LearningMan.Dialogs
         }
 
         private async Task resumeAfterOptionDialog(IDialogContext context, IAwaitable<object> result)
-        {
+        {   
 
             //This means  MessageRecievedAsync function of this dialog (PromptButtonsDialog) will receive users' messeges
             context.Wait(MessageReceivedAsync);

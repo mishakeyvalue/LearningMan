@@ -61,5 +61,10 @@ namespace BLL
             }
             return learner;
         }
+
+        public int CountCards()
+        {
+            return _repository.GetAll().Count;
+        }
     }
 }

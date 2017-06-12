@@ -30,13 +30,19 @@ namespace LearningMan.Dialogs.Vocabulary
         #endregion
 
         private static LearnersManager _manager = LearnersManager.Instance;
+        private string _learnerId;
+
+        public VocabularyDialog(string learnerId)
+        {
+            _learnerId = learnerId;
+        }
 
         public async Task StartAsync(IDialogContext context)
         {
-            context.Wait(MessageReceivedAsync);
+            mainMenuPrompt(context);
         }
 
-        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
+        private void mainMenuPrompt(IDialogContext context)
         {
             PromptDialog.Choice(context, resumeAfterMenuSelection, MENU_OPTS, "Awailable options: ");
         }
@@ -67,15 +73,22 @@ namespace LearningMan.Dialogs.Vocabulary
 
         private void addWordFunc(IDialogContext context)
         {
-            IDialog<NewWordViewModel> addingDialog = FormDialog.FromForm(NewWordViewModel.BuildForm);
-            context.Call( addingDialog, resumeAfterOptionDialog);
+            IDialog<NewWordViewModel> addingDialog = FormDialog.FromForm(NewWordViewModel.BuildForm, FormOptions.PromptInStart);
+            context.Call( addingDialog, resumeAfterAddingAsync);
+        }
+
+        private async Task resumeAfterAddingAsync(IDialogContext context, IAwaitable<NewWordViewModel> result)
+        {
+            NewWordViewModel word = await result;
+            _manager.AddCard(word.Key, word.Value, _learnerId);
+            await context.PostAsync($"New word added! Now your vocabulary consists of {_manager.CountCards()} words!");
         }
 
         private async Task resumeAfterOptionDialog(IDialogContext context, IAwaitable<object> result)
         {
 
             //This means  MessageRecievedAsync function of this dialog (PromptButtonsDialog) will receive users' messeges
-            context.Wait(MessageReceivedAsync);
+            mainMenuPrompt(context);
 
         }
     }
