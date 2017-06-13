@@ -81,7 +81,7 @@ namespace LearningMan.Dialogs.Vocabulary
         {
             NewWordViewModel word = await result;
             _manager.AddCard(word.Key, word.Value, _learnerId);
-            await context.PostAsync($"New word added! Now your vocabulary consists of {_manager.CountCards()} words!");
+            await context.PostAsync($"New word added! Now your vocabulary consists of {_manager.CountCards(_learnerId)} words!");
         }
 
         private async Task resumeAfterOptionDialog(IDialogContext context, IAwaitable<object> result)

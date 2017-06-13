@@ -16,7 +16,7 @@ namespace LearningMan.Tests
             Learner learner = new Learner() { Id = id };
             LearnersContext context = new LearnersContext();
             // Act
-            context.Learners.Add(learner); context.SaveChanges();
+            //context.Learners.Add(learner); context.SaveChanges();
 
             Learner savedLearner = context.Learners.Find(id);
 
@@ -36,5 +36,7 @@ namespace LearningMan.Tests
             // Assert
             Assert.IsTrue(context.Database.Exists());
         }
+
+
     }
 }

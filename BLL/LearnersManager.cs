@@ -22,6 +22,12 @@ namespace BLL
             LearnersEFRepository repo = new LearnersEFRepository(context);
             return new LearnersManager(repo);
         }
+
+        public void AddCard(string key, string value, object dummyLearnerId)
+        {
+            throw new NotImplementedException();
+        }
+
         private static LearnersManager _instance;
         public static LearnersManager Instance 
         {
@@ -54,17 +60,18 @@ namespace BLL
 
         private Learner ensureUserExists(string learnerId)
         {
-            Learner learner = _repository.GetAll().First(l => l.Id.Equals(learnerId));
+            Learner learner = _repository.GetAll().FirstOrDefault(l => l.Id.Equals(learnerId));
             if (learner == null) {
                 learner = new Learner() { Id = learnerId };
+                learner.Cards = new List<LearnersCard>();
                 _repository.Add(learner);
             }
             return learner;
         }
 
-        public int CountCards()
+        public int CountCards(string learnerId)
         {
-            return _repository.GetAll().Count;
+            return _repository.Get(learnerId).Cards.Count;
         }
     }
 }
