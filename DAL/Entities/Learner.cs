@@ -11,6 +11,6 @@ namespace DAL.Entities
     {
         public string Id { get; set; }
         // navigation property --- virtual for lazy loading
-        public virtual ICollection<LearnersCard> Cards { get; set; }
+        public ICollection<LearnersCard> Cards { get; set; }
     }
 }

@@ -10,5 +10,7 @@ namespace DAL.Entities
         public DateTime LastRepetition { get; set; }
         public byte Rating { get; set; }
 
+        public Learner Learner { get; set; }
+
     }
 }

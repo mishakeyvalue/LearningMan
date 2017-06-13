@@ -64,12 +64,42 @@
     <Compile Include="Entities\LearnersCard.cs" />
     <Compile Include="Interfaces\IEntity.cs" />
     <Compile Include="Interfaces\IRepository%28Generic%29.cs" />
+    <Compile Include="Migrations\201706081908079_InitialCreate.cs" />
+    <Compile Include="Migrations\201706081908079_InitialCreate.Designer.cs">
+      <DependentUpon>201706081908079_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706131808506_Foreign keys.cs" />
+    <Compile Include="Migrations\201706131808506_Foreign keys.Designer.cs">
+      <DependentUpon>201706131808506_Foreign keys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706131811148_Foreign keyss.cs" />
+    <Compile Include="Migrations\201706131811148_Foreign keyss.Designer.cs">
+      <DependentUpon>201706131811148_Foreign keyss.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706132004414_Foreign keysss.cs" />
+    <Compile Include="Migrations\201706132004414_Foreign keysss.Designer.cs">
+      <DependentUpon>201706132004414_Foreign keysss.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\LearnersContext.cs" />
     <Compile Include="Repositories\LearnersEFRepository.cs" />
     <Compile Include="Repositories\MongoRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201706081908079_InitialCreate.resx">
+      <DependentUpon>201706081908079_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706131808506_Foreign keys.resx">
+      <DependentUpon>201706131808506_Foreign keys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706131811148_Foreign keyss.resx">
+      <DependentUpon>201706131811148_Foreign keyss.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706132004414_Foreign keysss.resx">
+      <DependentUpon>201706132004414_Foreign keysss.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

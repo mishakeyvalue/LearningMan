@@ -23,11 +23,6 @@ namespace BLL
             return new LearnersManager(repo);
         }
 
-        public void AddCard(string key, string value, object dummyLearnerId)
-        {
-            throw new NotImplementedException();
-        }
-
         private static LearnersManager _instance;
         public static LearnersManager Instance 
         {
@@ -36,7 +31,9 @@ namespace BLL
                 return _instance;
             }
         }
-        private IRepository<Learner, string> _repository;
+
+        private readonly IRepository<Learner, string> _repository;
+
         public LearnersManager(IRepository<Learner, string> repository)
         {
             _repository = repository;
@@ -45,15 +42,16 @@ namespace BLL
         public void AddCard(string key, string value, string learnerId)
         {
            Learner learner = ensureUserExists(learnerId);
-            LearnersCard card = new LearnersCard()
-            {
+           LearnersCard card = new LearnersCard()
+           {
                 Key = key,
                 Value = value,
                 LastRepetition = DateTime.Now,
                 Rating = 1
-            };
-            learner.Cards.Add(card);
-            _repository.Save(learner);
+           };
+           if (learner.Cards == null) learner.Cards = new List<LearnersCard>();
+           learner.Cards.Add(card);
+           _repository.Save(learner);
 
 
         }
@@ -61,17 +59,48 @@ namespace BLL
         private Learner ensureUserExists(string learnerId)
         {
             Learner learner = _repository.GetAll().FirstOrDefault(l => l.Id.Equals(learnerId));
-            if (learner == null) {
-                learner = new Learner() { Id = learnerId };
-                learner.Cards = new List<LearnersCard>();
-                _repository.Add(learner);
+
+            if (learner == null)
+            {
+                learner = createLearner(learnerId);
             }
+
             return learner;
+        }
+
+        private Learner createLearner(string learnerId)
+        {
+            var learner = new Learner
+            {
+                Id = learnerId,
+                Cards = new List<LearnersCard>()
+            };
+            var helloCard = new LearnersCard()
+            {
+                Key = "Hello world!",
+                Value = "Привет, мир!",
+                LastRepetition = DateTime.Now,
+                Rating = 12,
+                Learner = learner
+            };
+            learner.Cards.Add(helloCard);
+            _repository.Add(learner);
+            return learner;
+
         }
 
         public int CountCards(string learnerId)
         {
-            return _repository.Get(learnerId).Cards.Count;
+            try
+            {
+
+                return _repository.Get(learnerId).Cards.Count;
+            }
+            catch (NullReferenceException)
+            {
+                createLearner(learnerId);
+                return 0;
+            }
         }
     }
 }

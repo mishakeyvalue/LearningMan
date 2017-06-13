@@ -29,8 +29,8 @@ namespace LearningMan.Dialogs.Vocabulary
         };
         #endregion
 
-        private static LearnersManager _manager = LearnersManager.Instance;
-        private string _learnerId;
+        private static readonly LearnersManager _manager = LearnersManager.Instance;
+        private readonly string _learnerId;
 
         public VocabularyDialog(string learnerId)
         {
@@ -77,11 +77,26 @@ namespace LearningMan.Dialogs.Vocabulary
             context.Call( addingDialog, resumeAfterAddingAsync);
         }
 
+        // ReSharper disable once InconsistentNaming
         private async Task resumeAfterAddingAsync(IDialogContext context, IAwaitable<NewWordViewModel> result)
         {
+            
             NewWordViewModel word = await result;
-            _manager.AddCard(word.Key, word.Value, _learnerId);
+            await context.PostAsync($"Trying to add your word..");
+            try
+            {
+                _manager.AddCard(word.Key, word.Value, _learnerId);
+            }
+            catch (Exception e)
+            {
+                await context.PostAsync($"{e.Message}");
+                await context.PostAsync($"{e.StackTrace}");
+
+                throw;
+            }
             await context.PostAsync($"New word added! Now your vocabulary consists of {_manager.CountCards(_learnerId)} words!");
+            mainMenuPrompt(context);
+
         }
 
         private async Task resumeAfterOptionDialog(IDialogContext context, IAwaitable<object> result)

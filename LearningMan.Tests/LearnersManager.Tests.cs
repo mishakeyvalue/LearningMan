@@ -9,7 +9,7 @@ namespace LearningMan.Tests
     [TestClass]
     public class LearnersManager_Tests 
     {
-        private string dummyLearnerId = "AwesomeLearner";
+        private string dummyLearnerId = "default-user";
 
         [TestMethod]
         public void UserManager_AddCard_CountIncreases()
