@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Bot.Connector;
 
 namespace LearningMan.Dialogs.Vocabulary
 {
@@ -57,7 +58,7 @@ namespace LearningMan.Dialogs.Vocabulary
                     addWordFunc(context);
                     break;
                 case VOC_LIST_MENU_OPT:
-                    context.Call(new TrainingDialog(), resumeAfterOptionDialog);
+                    await context.PostAsync(printAllWords());
                     break;
                 case HELP_MENU_OPT:
                     context.Call(new HelpDialog(), resumeAfterOptionDialog);
@@ -69,6 +70,12 @@ namespace LearningMan.Dialogs.Vocabulary
                     await context.PostAsync("No such option =(");
                     break;
             }
+        }
+
+        private string printAllWords()
+        {
+            return _manager.PrintAll(_learnerId);
+
         }
 
         private void addWordFunc(IDialogContext context)

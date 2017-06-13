@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Bot.Connector;
 
 namespace BLL
 {
@@ -101,6 +102,21 @@ namespace BLL
                 createLearner(learnerId);
                 return 0;
             }
+        }
+
+        public string PrintAll(string learnerId)
+        {
+            string res = "";
+            var cards = _repository.Get(learnerId).Cards;
+            if (cards == null)
+            {
+                cards = createLearner(learnerId).Cards;
+            }
+            for (int i = 0; i < cards.Count; i++)
+            {
+                res += $"{i+1}.  {cards.ElementAtOrDefault(i)?.Key}  ---  {cards.ElementAtOrDefault(i)?.Value}\n";
+            }
+            return res;
         }
     }
 }

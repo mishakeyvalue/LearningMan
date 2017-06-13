@@ -75,8 +75,7 @@ namespace LearningMan.Dialogs
         {   
 
             //This means  MessageRecievedAsync function of this dialog (PromptButtonsDialog) will receive users' messeges
-            context.Wait(MessageReceivedAsync);
-            
+            context.Wait(MessageReceivedAsync);           
         }
 
         private async Task Greetings (IDialogContext context)
