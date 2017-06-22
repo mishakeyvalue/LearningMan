@@ -59,6 +59,7 @@ namespace LearningMan.Dialogs.Vocabulary
                     break;
                 case VOC_LIST_MENU_OPT:
                     await context.PostAsync(printAllWords());
+                    mainMenuPrompt(context);
                     break;
                 case HELP_MENU_OPT:
                     context.Call(new HelpDialog(), resumeAfterOptionDialog);

@@ -9,7 +9,6 @@ namespace DAL.Entities
         public string Value { get; set; }
         public DateTime LastRepetition { get; set; }
         public byte Rating { get; set; }
-        public Learner Learner { get; set; }
 
     }
 }

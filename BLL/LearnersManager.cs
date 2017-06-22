@@ -19,8 +19,9 @@ namespace BLL
     {
         public static LearnersManager GetManager()
         {
+            string cs = "mongodb://sa:q1w2e3r4@ds157500.mlab.com:57500/storeage";
             var context = new LearnersContext();
-            LearnersEFRepository repo = new LearnersEFRepository(context);
+            var repo = new MongoRepository<Learner, string>(cs);
             return new LearnersManager(repo);
         }
 
@@ -82,7 +83,6 @@ namespace BLL
                 Value = "Привет, мир!",
                 LastRepetition = DateTime.Now,
                 Rating = 12,
-                Learner = learner
             };
             learner.Cards.Add(helloCard);
             _repository.Add(learner);
