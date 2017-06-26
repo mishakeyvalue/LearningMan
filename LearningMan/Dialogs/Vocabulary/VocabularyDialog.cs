@@ -30,7 +30,7 @@ namespace LearningMan.Dialogs.Vocabulary
         };
         #endregion
 
-        private static readonly LearnersManager _manager = LearnersManager.Instance;
+        private static readonly LearnersService _service = LearnersService.Instance;
         private readonly string _learnerId;
 
         public VocabularyDialog(string learnerId)
@@ -75,7 +75,7 @@ namespace LearningMan.Dialogs.Vocabulary
 
         private string printAllWords()
         {
-            return _manager.PrintAll(_learnerId);
+            return _service.PrintAll(_learnerId);
 
         }
 
@@ -93,7 +93,7 @@ namespace LearningMan.Dialogs.Vocabulary
             await context.PostAsync($"Trying to add your word..");
             try
             {
-                _manager.AddCard(word.Key, word.Value, _learnerId);
+                _service.AddCard(word.Key, word.Value, _learnerId);
             }
             catch (Exception e)
             {
@@ -102,7 +102,7 @@ namespace LearningMan.Dialogs.Vocabulary
 
                 throw;
             }
-            await context.PostAsync($"New word added! Now your vocabulary consists of {_manager.CountCards(_learnerId)} words!");
+            await context.PostAsync($"New word added! Now your vocabulary consists of {_service.CountCards(_learnerId)} words!");
             mainMenuPrompt(context);
 
         }

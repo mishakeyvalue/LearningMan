@@ -13,20 +13,19 @@ namespace BLL
     /// <summary>
     /// Utility class that encapsulates main logic
     /// for manipulating user data
-    /// </summary>
-    
-    public class LearnersManager
+    /// </summary>    
+    public class LearnersService : ILearnersService
     {
-        public static LearnersManager GetManager()
+        public static LearnersService GetManager()
         {
             string cs = "mongodb://sa:q1w2e3r4@ds157500.mlab.com:57500/storeage";
             var context = new LearnersContext();
             var repo = new MongoRepository<Learner, string>(cs);
-            return new LearnersManager(repo);
+            return new LearnersService(repo);
         }
 
-        private static LearnersManager _instance;
-        public static LearnersManager Instance 
+        private static LearnersService _instance;
+        public static LearnersService Instance 
         {
             get {
                 if (_instance == null) _instance = GetManager();
@@ -36,7 +35,7 @@ namespace BLL
 
         private readonly IRepository<Learner, string> _repository;
 
-        public LearnersManager(IRepository<Learner, string> repository)
+        public LearnersService(IRepository<Learner, string> repository)
         {
             _repository = repository;
         }

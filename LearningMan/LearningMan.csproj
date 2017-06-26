@@ -155,7 +155,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\AutofacConfig.cs" />
+    <Compile Include="Utils\AutofacInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

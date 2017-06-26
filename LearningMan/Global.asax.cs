@@ -12,7 +12,7 @@ namespace LearningMan
     {
         protected void Application_Start()
         {
-            AutofacConfig.ConfigureContainer(); // my
+            AutofacInitializer.Initialize(); // My dependency resolver
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
         }

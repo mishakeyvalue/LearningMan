@@ -30,7 +30,7 @@ namespace LearningMan.Dialogs
         };
         #endregion
 
-        private static LearnersManager _manager = LearnersManager.Instance;
+        private static LearnersService _service = LearnersService.Instance;
         private string _userId;
 
         public async Task StartAsync(IDialogContext context)
